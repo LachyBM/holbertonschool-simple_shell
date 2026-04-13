@@ -9,12 +9,12 @@ int main(void)
 {
 	pid_t child_pid;
 	int status;
-	int nread;
+	ssize_t nread;
 	size_t len = 0;
 	char *line = NULL;
 	char *argv[2];
 
-	while (nread != -1)
+	while (1)
 	{
 		printf("cisfun$ ");
 		nread = getline(&line, &len, stdin);
@@ -24,6 +24,12 @@ int main(void)
 		argv[1] = NULL;
 
 		child_pid = fork();
+		if( nread == -1)
+		{
+			free(line);
+			printf("\n");
+			return (0);
+		}
 		if (child_pid == -1)
 		{	
 	  		perror("Error:");
