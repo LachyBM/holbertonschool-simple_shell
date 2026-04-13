@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <sys/wait.h>
+
+extern char **environ;
+
+int main(void)
+{
+	pid_t child_pid;
+	int status;
+	int nread;
+	size_t len = 0;
+	char *line = NULL;
+	char *argv[2];
+
+	while (nread != -1)
+	{
+		printf("cisfun$ ");
+		nread = getline(&line, &len, stdin);
+		line[nread -1] = '\0';
+
+		argv[0] = line;
+		argv[1] = NULL;
+
+		child_pid = fork();
+		if (child_pid == -1)
+		{	
+	  		perror("Error:");
+			free(line);
+       			return (1);
+    		}
+ 		if (child_pid == 0)
+    		{
+			execve(argv[0], argv, environ);
+			perror("Error:");
+			free(line);
+    			exit(1);
+    		}
+   		else
+    		{
+        		wait(&status);
+    		}
+		
+	}
+	free(line);
+	return (0);
+	
+}
