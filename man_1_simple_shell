@@ -1,1 +1,30 @@
-man
+.TH HSH 1 "14 Apr 2026" "0.1" "HSH"
+.SH NAME
+.B hsh
+- command interpreter (simple shell)
+.SH SYNOPSIS
+.B ./hsh
+.SH DESCRIPTION
+The hsh shell is a command-line interpreter that provides a command line user interface for Unix-like operating systems.
+The shell is both an interactive command language and a scripting language, and is used by the operating system to control the 
+execution of the system using shell scripts.
+
+.B Overview
+
+.B Interactive mode
+
+.B Non-interactive mode
+
+.B Built-ins
+
+.SH EXAMPLE
+
+.SH EXIT STATUS
+
+.SH ENVIRONMENT
+
+.B PATH
+
+.SH BUGS
+
+.SH AUTHOR
