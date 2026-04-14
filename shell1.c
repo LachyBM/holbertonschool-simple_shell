@@ -16,7 +16,7 @@ int main(void)
 
 	while (1)
 	{
-		printf("cisfun$ %ld ",nread);
+		printf("cisfun$ ");
 		nread = getline(&line, &len, stdin);
 		line[nread -1] = '\0';
 
