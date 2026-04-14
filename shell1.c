@@ -13,6 +13,7 @@ int main(void)
 	size_t len = 0;
 	char *line = NULL;
 	char *argv[2];
+	int check;
 
 	while (1)
 	{
@@ -25,12 +26,14 @@ int main(void)
                         return (0);
                 }
 	
-		while (nread >= 0 && line[nread - 1] == '\n')
-			line[nread - 1] = '\0';
+	/*	while (nread >= 0 && line[nread - 1] == '\n')*/
+		line[nread - 1] = '\0';
 		
-		while (nread >= 0 && line[nread - 2] == ' ')
+		check = nread - 2;
+
+		while (check >= 0 && line[check] == ' ')
 		{
-			line[nread - 2] = '\0';
+			line[check] = '\0';
 			nread--;
 		}
 
