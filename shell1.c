@@ -16,20 +16,22 @@ int main(void)
 
 	while (1)
 	{
-		printf("cisfun$ ");
+		if (isatty(STDIN_FILENO))
+			printf("cisfun$ ");
 		nread = getline(&line, &len, stdin);
+		if (nread == -1)
+                {
+                        free(line);
+                        printf("\n");
+                        return (0);
+                }
+
 		line[nread -1] = '\0';
 
 		argv[0] = line;
 		argv[1] = NULL;
 
 		child_pid = fork();
-		if(nread == -1)
-		{
-			free(line);
-			printf("\n");
-			return (0);
-		}
 		if (child_pid == -1)
 		{	
 	  		perror("Error:");
