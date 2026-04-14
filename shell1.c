@@ -24,8 +24,15 @@ int main(void)
                         free(line);        
                         return (0);
                 }
-
-		line[nread -1] = '\0';
+	
+	/*	while (nread >= 0 && line[nread - 1] == '')*/
+			line[nread - 1] = '\0';
+		
+		while (nread >= 0 && line[nread - 2] == ' ')
+		{
+			nread--;
+			line[nread - 1] = '\0';
+		}
 
 		argv[0] = line;
 		argv[1] = NULL;
