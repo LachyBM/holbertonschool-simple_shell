@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <sys/wait.h>
+#include <string.h>
 
 extern char **environ;
 
@@ -26,16 +27,18 @@ int main(void)
                         return (0);
                 }
 	
-	/*	while (nread >= 0 && line[nread - 1] == '\n')*/
-		line[nread - 1] = '\0';
-		
-		check = nread - 2;
+		check = (int)strlen(line) - 1;
 
-		while (check >= 0 && line[check] == ' ')
+		while (check >= 0 && (line[check] == ' '  ||
+                   line[check] == '\t' ||
+                   line[check] == '\n' ||
+                   line[check] == '\r'))
 		{
-			line[check] = '\0';
-			nread--;
+			line[check--] = '\0';
+		
 		}
+		if (check < 0)
+			continue;
 
 		argv[0] = line;
 		argv[1] = NULL;
