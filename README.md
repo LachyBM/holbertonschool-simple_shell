@@ -20,7 +20,6 @@ Lastly, you can run our shell with the following executable:
 ```
 
 ### Output Examples
-```sh
 
 ### Files
 | File Name | Description |
