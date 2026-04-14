@@ -32,7 +32,10 @@ int main(void)
 			line[check--] = '\0';
 		}
 		if (check < 0)
+		{
+			free(line);
 			continue;
+		}
 		argv[0] = line;
 		argv[1] = NULL;
 		child_pid = fork();
@@ -52,6 +55,7 @@ int main(void)
    		else
     		{
         		wait(&status);
+			free(line);
     		}
 	}
 	free(line);
