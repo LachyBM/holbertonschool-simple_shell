@@ -17,12 +17,11 @@ int main(void)
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-			printf("cisfun$ ");
+			printf("hsh$ ");
 		nread = getline(&line, &len, stdin);
 		if (nread == -1)
                 {
-                        free(line);
-                        printf("\n");
+                        free(line);        
                         return (0);
                 }
 
