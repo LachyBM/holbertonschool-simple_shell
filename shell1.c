@@ -25,13 +25,13 @@ int main(void)
                         return (0);
                 }
 	
-	/*	while (nread >= 0 && line[nread - 1] == '')*/
+		while (nread >= 0 && line[nread - 1] == '\n')
 			line[nread - 1] = '\0';
 		
 		while (nread >= 0 && line[nread - 2] == ' ')
 		{
+			line[nread - 2] = '\0';
 			nread--;
-			line[nread - 1] = '\0';
 		}
 
 		argv[0] = line;
