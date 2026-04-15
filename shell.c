@@ -1,0 +1,78 @@
+#include "shell.h"
+
+
+char *trim_line(char *line)
+{
+	char *start;
+	int i;
+
+	i = (int)strlen(line) - 1;
+	while (i >= 0 && (line[i] == ' ' || line[i] == '\t'
+		|| line[i] == '\n' || line[i] == '\r'))
+		line[i--] = '\0';
+	start = line;
+	while (*start == ' ' || *start == '\t' || *start == '\r')
+		start++;
+	if (*start == '\0')
+		return (NULL);
+	return (start);
+}
+
+int run_command(char *cmd)
+{
+	char *argv[2];
+	pid_t child_pid;
+	int status;
+
+	argv[0] = cmd;
+	argv[1] = NULL;
+	child_pid = fork();
+	if (child_pid == -1)
+	{
+		perror("Error:");
+		return (1);
+	}
+	if (child_pid == 0)
+	{
+		execve(argv[0], argv, environ);
+		perror("Error:");
+		exit(1);
+	}
+	wait(&status);
+	return (0);
+}
+
+int main(void)
+{
+	ssize_t nread;
+	size_t len = 0;
+	char *line = NULL;
+	char *start;
+
+	while (1)
+	{
+		if (isatty(STDIN_FILENO))
+			printf("hsh$ ");
+		nread = getline(&line, &len, stdin);
+		if (nread == -1)
+		{
+			free(line);
+			return (0);
+		}
+		start = trim_line(line);
+		if (start == NULL)
+		{
+			free(line);
+			line = NULL;
+			continue;
+		}
+		if (run_command(start) == 1)
+		{
+			free(line);
+			return (1);
+		}
+		free(line);
+		line = NULL;
+	}
+	return (0);
+}
