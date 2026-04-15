@@ -10,7 +10,7 @@
 
 extern char **environ;
 
-char *time_line(char *line);
-int run_command(char *cmd);
+char *time_line(char *line, char **argv);
+int run_command(char **argv);
 
 #endif

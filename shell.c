@@ -1,31 +1,30 @@
 #include "shell.h"
 
 
-char *trim_line(char *line)
+char *split(char *line, char **argv)
 {
-	char *start;
-	int i;
+	char *str;
+	char *piece;
+	int i = 0;
 
-	i = (int)strlen(line) - 1;
-	while (i >= 0 && (line[i] == ' ' || line[i] == '\t'
-		|| line[i] == '\n' || line[i] == '\r'))
-		line[i--] = '\0';
-	start = line;
-	while (*start == ' ' || *start == '\t' || *start == '\r')
-		start++;
-	if (*start == '\0')
+	str = strdup(line);
+	if (!str)
 		return (NULL);
-	return (start);
+	piece = strtok(str, " \t\r\n\a");
+	while (piece != NULL && i < 63)
+	{
+		argv[i++] = piece;
+		piece = strtok(NULL, " \t\r\n\a");
+	}
+	argv[i] = NULL;
+	return (str);
 }
 
-int run_command(char *cmd)
+int cmd(char **argv)
 {
-	char *argv[2];
 	pid_t child_pid;
 	int status;
 
-	argv[0] = cmd;
-	argv[1] = NULL;
 	child_pid = fork();
 	if (child_pid == -1)
 	{
@@ -47,7 +46,8 @@ int main(void)
 	ssize_t nread;
 	size_t len = 0;
 	char *line = NULL;
-	char *start;
+	char *argv[64];
+	char *str;
 
 	while (1)
 	{
@@ -59,18 +59,21 @@ int main(void)
 			free(line);
 			return (0);
 		}
-		start = trim_line(line);
-		if (start == NULL)
+		str = split(line, argv);
+		if (argv[0] == NULL || str == NULL)
 		{
+			free(str);
 			free(line);
 			line = NULL;
 			continue;
 		}
-		if (run_command(start) == 1)
+		if (cmd(argv) == 1)
 		{
+			free(str);
 			free(line);
 			return (1);
 		}
+		free(str);
 		free(line);
 		line = NULL;
 	}
