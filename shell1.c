@@ -26,17 +26,22 @@ int main(void)
                         free(line);        
                         return (0);
                 }
+		
 		check = (int)strlen(line) - 1;
-		while (check >= 0 && (line[check] == ' '  || line[check] == '\t' || line[check] == '\n' || line[check] == '\r'))
+		while (check >= 0 && (line[check] == ' ' || line[check] == '\t' 
+			    || line[check] == '\n' || line[check] == '\r'))
+			    line[check--] = '\0';
+
+		char *start = line;
+		while (*start == ' ' || *start == '\t' || *start == '\r')
+			    start++;
+
+		if (*start == '\0')
 		{
-			line[check--] = '\0';
+		    free(line);
+		    continue;
 		}
-		if (check < 0)
-		{
-			free(line);
-			continue;
-		}
-		argv[0] = line;
+		argv[0] = start;
 		argv[1] = NULL;
 		child_pid = fork();
 		if (child_pid == -1)
