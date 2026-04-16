@@ -65,7 +65,7 @@ char *the_path(char *path)
 	if (access(path,X_OK) == 0)
 		return strdup(path);
 
- path_env = find_path_env();
+	 path_env = find_path_env();
 	if (!path_env)
 	{
 		printf("PATH NOT SET\n");
@@ -82,7 +82,10 @@ int cmd(char **argv)
 
 	path = the_path(argv[0]);
 	if (!path)
-		return (1);
+	{
+		fprintf(stderr,"./hsh: 1: %s: not found\n", argv[0]);
+		return (127);
+	}
 	child_pid = fork();
 	if (child_pid == -1)
 	{
@@ -109,6 +112,7 @@ int main(void)
 	char *line = NULL;
 	char *argv[64];
 	char *str;
+	int status;
 
 	while (1)
 	{
@@ -118,7 +122,7 @@ int main(void)
 		if (nread == -1)
 		{
 			free(line);
-			return (0);
+			return (status);
 		}
 		str = split(line, argv);
 		if (argv[0] == NULL || str == NULL)
@@ -128,15 +132,10 @@ int main(void)
 			line = NULL;
 			continue;
 		}
-		if (cmd(argv) == 1)
-		{
-			free(str);
-			free(line);
-			return (1);
-		}
+		status = cmd(argv);
 		free(str);
 		free(line);
 		line = NULL;
 	}
-	return (0);
+	return (status);
 }

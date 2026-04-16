@@ -10,7 +10,10 @@
 
 extern char **environ;
 
-char *time_line(char *line, char **argv);
-int run_command(char **argv);
+char *split(char *line, char **argv);
+char *find_path_env(void);
+char *search_in_path(char *path_env, char *path);
+char *the_path(char *path);
+int cmd(char **argv);
 
 #endif
