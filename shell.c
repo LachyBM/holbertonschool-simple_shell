@@ -103,6 +103,7 @@ int main(void)
 	char *line = NULL;
 	char *argv[64];
 	char *str;
+	int status;
 
 	while (1)
 	{
@@ -112,7 +113,7 @@ int main(void)
 		if (nread == -1)
 		{
 			free(line);
-			return (0);
+			return (status);
 		}
 		str = split(line, argv);
 		if (argv[0] == NULL || str == NULL)
@@ -122,10 +123,11 @@ int main(void)
 			line = NULL;
 			continue;
 		}
-		cmd(argv);
+		status = cmd(argv);
+	/*	printf("{%d}", status);*/
 		free(str);
 		free(line);
 		line = NULL;
 	}
-	return (0);
+	return (status);
 }
