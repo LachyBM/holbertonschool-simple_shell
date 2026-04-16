@@ -31,10 +31,7 @@ char *the_path(char *path)
 
 	if (access(path,X_OK) == 0)
 		return strdup(path);
-	/**
-	 * walks through environ for PATH=
-	 * if not exit
-	 */ 
+	
 	while (environ[j])
 	{
 		if (strncmp(environ[j], "PATH=", 5) == 0)
@@ -76,7 +73,10 @@ int cmd(char **argv)
 
 	path = the_path(argv[0]);
 	if (!path)
-		return (1);
+	{
+		fprintf(stderr,"./hsh: 1: %s: not found\n", argv[0]);
+		return (127);
+	}
 	child_pid = fork();
 	if (child_pid == -1)
 	{
@@ -122,12 +122,7 @@ int main(void)
 			line = NULL;
 			continue;
 		}
-		if (cmd(argv) == 1)
-		{
-			free(str);
-			free(line);
-			return (1);
-		}
+		cmd(argv);
 		free(str);
 		free(line);
 		line = NULL;
