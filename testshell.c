@@ -65,10 +65,9 @@ char *the_path(char *path)
 	if (access(path,X_OK) == 0)
 		return strdup(path);
 
-	 path_env = find_path_env();
-	if (!path_env)
+	path_env = find_path_env();
+	if (!path_env || path_env[0] == '\0' )
 	{
-		printf("PATH NOT SET\n");
 		return (NULL);
         }
 	return (search_in_path(path_env, path));
