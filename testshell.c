@@ -2,8 +2,8 @@
 
 char *split(char *line, char **argv)
 {
-char *str, *piece;
- int i = 0;
+	char *str, *piece;
+	int i = 0;
 
 	str = strdup(line);
 	if (!str)
@@ -20,56 +20,54 @@ char *str, *piece;
 
 char *find_path_env(void)
 {
-  int j = 0;
-  
-while (environ[j])
+	int j = 0;
+
+	while (environ[j])
 	{
 		if (strncmp(environ[j], "PATH=", 5) == 0)
-		  return(environ[j] + 5);
-		j++;	
+			return (environ[j] + 5);
+		j++;
 	}
-  return(NULL);
-}
-
-char *search_in_path (char *path_env, char *path)
-{
-        char *path_copy, *piece;
-        char len[1024];
-
-        path_copy = strdup(path_env);
-
-	piece = strtok(path_copy, ":");
-	while (piece)
-	{
-			sprintf(len,"%s/%s", piece, path);
-
-			if(access(len, X_OK) == 0)
-			{
-				free(path_copy);
-				return strdup(len);
-			}
-			piece = strtok(NULL, ":");
-	}
-		
- 	free(path_copy);
 	return (NULL);
 }
-  
+
+char *search_in_path(char *path_env, char *path)
+{
+	char *path_copy, *piece;
+	char len[1024];
+
+	path_copy = strdup(path_env);
+	piece = strtok(path_copy, ":");
+
+	while (piece)
+	{
+		sprintf(len, "%s/%s", piece, path);
+		if (access(len, X_OK) == 0)
+		{
+			free(path_copy);
+			return (strdup(len));
+		}
+		piece = strtok(NULL, ":");
+	}
+	free(path_copy);
+	return (NULL);
+}
+
 char *the_path(char *path)
 {
-  char *path_env;
+	char *path_env;
 
 	if (!path)
 		return (NULL);
 
-	if (access(path,X_OK) == 0)
-		return strdup(path);
+	if (access(path, X_OK) == 0)
+		return (strdup(path));
 
 	path_env = find_path_env();
-	if (!path_env || path_env[0] == '\0' )
+	if (!path_env || path_env[0] == '\0')
 	{
 		return (NULL);
-        }
+	}
 	return (search_in_path(path_env, path));
 }
 
@@ -82,7 +80,7 @@ int cmd(char **argv)
 	path = the_path(argv[0]);
 	if (!path)
 	{
-		fprintf(stderr,"./hsh: 1: %s: not found\n", argv[0]);
+		fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
 		return (127);
 	}
 	child_pid = fork();
