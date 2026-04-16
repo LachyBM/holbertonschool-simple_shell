@@ -102,6 +102,42 @@ int cmd(char **argv)
 	return (0);
 }
 
+int built_exit(char **argv)
+{
+	(void)argv;
+	exit(0);
+}
+
+int built_env(char **argv)
+{
+	unsigned int i = 0;
+	(void)argv;
+
+	while (environ[i])
+	{
+		printf("%s\n", environ[i]);
+		i++;
+	}
+	return (0);
+}
+
+int built_c(char **argv)
+{
+	(void)argv;
+	return (0);
+}
+
+int inbuilt(char **argv)
+{
+	if (strcmp(argv[0], "exit") == 0)
+		return (built_exit(argv));
+	if (strcmp(argv[0], "env") == 0)
+		return (built_env(argv));
+	if (strcmp(argv[0], "^C") == 0)
+		return (built_c(argv));
+	return (-1);
+}
+
 int main(void)
 {
 	ssize_t nread;
@@ -129,7 +165,9 @@ int main(void)
 			line = NULL;
 			continue;
 		}
-		status = cmd(argv);
+		status = inbuilt(argv);
+		if (status == -1)
+			status = cmd(argv);
 		free(str);
 		free(line);
 		line = NULL;
