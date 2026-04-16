@@ -112,7 +112,7 @@ int main(void)
 	char *line = NULL;
 	char *argv[64];
 	char *str;
-	int status;
+	int status = 0;
 
 	while (1)
 	{
