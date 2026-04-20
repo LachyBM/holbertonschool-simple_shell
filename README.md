@@ -18,8 +18,28 @@ Lastly, you can run our shell with the following executable:
 ```sh
 ./hsh
 ```
-
 ### Output Examples
+```sh
+root@63bb13fab09146a795396ea95a351084-2377118072:~/holbertonschool-simple_shell# ./hsh
+hsh$ ls -l
+total 96
+-rw-r--r-- 1 root root   737 Apr 20 06:08 '#exec.c#'
+-rw-r--r-- 1 root root  2553 Apr 20 06:08 '#testshell.c#'
+-rw-r--r-- 1 root root   142 Apr 20 06:08  AUTHORS
+-rw-r--r-- 1 root root  1498 Apr 20 07:24  README.md
+drwxr-xr-x 2 root root  4096 Apr 20 06:08  TEST
+drwxr-xr-x 2 root root  4096 Apr 20 06:08  alpha
+-rw-r--r-- 1 root root  1469 Apr 20 06:18  builtins.c
+-rw-r--r-- 1 root root   733 Apr 20 06:15  exec.c
+drwxr-xr-x 2 root root  4096 Apr 20 06:08  holder
+-rwxr-xr-x 1 root root 17352 Apr 20 07:25  hsh
+-rw-r--r-- 1 root root   571 Apr 20 06:08  man_1_simple_shell
+-rw-r--r-- 1 root root   505 Apr 20 06:08  parser.c
+-rw-r--r-- 1 root root  1523 Apr 20 06:08  path.c
+-rw-r--r-- 1 root root   561 Apr 20 06:08  shell.h
+-rwxr-xr-x 1 root root 17136 Apr 20 06:08  testing
+-rw-r--r-- 1 root root   788 Apr 20 06:08  testshell.c
+
 
 ### Files
 | File Name | Description |
