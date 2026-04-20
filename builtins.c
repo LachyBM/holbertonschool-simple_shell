@@ -5,7 +5,7 @@
  * @argv: array of arguments
  * @str: duplicated input string
  * @line: original input line
- * @status:
+ * @status: last command exit status
  *
  * Return: does not return (exits the program)
  */
@@ -59,6 +59,7 @@ int built_c(char **argv)
  * @argv: array of arguments
  * @str: duplicated input string
  * @line: original input line
+ * @status: last exit status of executed command (used by exit built-in)
  *
  * Return: result of built-in function, or -1 if not a built-in
  */
