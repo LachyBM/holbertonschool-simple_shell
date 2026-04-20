@@ -103,11 +103,11 @@ int cmd(char **argv)
 	}
 	wait(&status);
 	free(path);
-	/* if (WIFEXITED(status))
+	if (WIFEXITED(status))
 	{
 		int exit_status = WEXITSTATUS(status);
 		return(exit_status);
-	}*/
+	}
 	return (1);
 }
 
