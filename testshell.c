@@ -105,7 +105,10 @@ int cmd(char **argv)
 	free(path);
 	
 	if (WIFEXITED(status))
-		return(WEXITSTATUS(status));
+	{
+		int exit_status = WEXITSTATUS(status);
+		return(exit_status);
+	}
 	return (1);
 }
 
