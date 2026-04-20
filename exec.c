@@ -1,0 +1,39 @@
+#include "shell.h"
+
+/**
+ * cmd - executes a comman using fork and execve
+ * @argv: array of arguments (command and its parameters)
+ *
+ * Return: 0 on success, 127 if command not found, or 1 on error
+ */
+
+int cmd(char **argv)
+{
+	pid_t child_pid;
+	int status;
+	char *path;
+
+	path = the_path(argv[0]);
+	if (!path)
+	{
+		fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
+		return (127);
+	}
+	child_pid = fork();
+	if (child_pid == -1)
+	{
+		perror("Error:");
+		free(path);
+		return (1);
+	}
+	if (child_pid == 0)
+	{
+		execve(path, argv, environ);
+		perror("Error:");
+		free(path);
+		exit(1);
+	}
+	wait(&status);
+	free(path);
+	return (0);
+}

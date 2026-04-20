@@ -1,5 +1,6 @@
 #include "shell.h"
 
+<<<<<<< HEAD
 char *split(char *line, char **argv)
 {
 	char *str, *piece;
@@ -150,6 +151,16 @@ int inbuilt(char **argv, char *str, char *line, int status)
 		return (built_c(argv));
 	return (-1);
 }
+=======
+/**
+ * main - entry point for the simple shell
+ *
+ * Description: reads user input, parses commands, executes built-ins
+ * or external commands in a loop until exit or EOF.
+ *
+ * Return: exit status
+ */
+>>>>>>> cef6dd8 (Split main function, added comments, updated header file)
 
 int main(void)
 {

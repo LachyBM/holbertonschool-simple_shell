@@ -8,16 +8,26 @@
 #include <sys/stat.h>
 #include <string.h>
 
+/* external environment*/
 extern char **environ;
 
 char *split(char *line, char **argv);
 char *find_path_env(void);
 char *search_in_path(char *path_env, char *path);
 char *the_path(char *path);
+
 int cmd(char **argv);
+<<<<<<< HEAD
 int built_exit(char **argv, char *str, char *line, int status);
 int built_env(char **argv);
 int built_c(char **argv);
 int inbuilt(char **argv, char *str, char *line,int status);
+=======
+int inbuilt(char **argv, char *str, char *line);
+
+int built_exot(char **argv, char *str, char *line);
+int built_env(char **argv);
+int built_c(char **argv);
+>>>>>>> cef6dd8 (Split main function, added comments, updated header file)
 
 #endif
