@@ -103,7 +103,13 @@ int cmd(char **argv)
 	}
 	wait(&status);
 	free(path);
-	return (0);
+	
+	if (!(WIFEXITED(status) && (WEXITSTATUS(status) == 0)))
+	{
+		fprintf(strderr, "Child failed. Killing all running children");
+		exit(1);
+	}
+	return (1);
 }
 
 int built_exit(char **argv, char *str, char *line)
