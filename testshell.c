@@ -103,13 +103,11 @@ int cmd(char **argv)
 	}
 	wait(&status);
 	free(path);
-	
-	if (WIFEXITED(status))
+	/* if (WIFEXITED(status))
 	{
 		int exit_status = WEXITSTATUS(status);
-		printf("%d", exit_status);
 		return(exit_status);
-	}
+	}*/
 	return (1);
 }
 
@@ -118,7 +116,7 @@ int built_exit(char **argv, char *str, char *line)
 	(void)argv;
 	free(str);
 	free(line);
-	exit(0);
+	exit(22);
 }
 
 int built_env(char **argv)
