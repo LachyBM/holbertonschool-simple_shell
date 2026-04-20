@@ -35,7 +35,7 @@ int cmd(char **argv)
 	}
 	wait(&status);
 
-	if WIFEXITED(status))
+	if (WIFEXITED(status))
 	status = WEXITSTATUS(status);
 
 	free(path);
