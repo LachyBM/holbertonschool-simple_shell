@@ -106,7 +106,9 @@ int cmd(char **argv)
 	
 	if (!(WIFEXITED(status) && (WEXITSTATUS(status) == 0)))
 	{
+		free(path);
 		exit(2);
+
 	}
 	return (1);
 }
