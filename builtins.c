@@ -12,9 +12,10 @@
 
 int built_exit(char **argv, char *str, char *line, int status)
 {
-int statusj = status;
-if (argv[1] != NULL)
-  statusj = (int)strtol(argv[1], NULL, 10);
+	int statusj = status;
+
+	if (argv[1] != NULL)
+		statusj = (int)strtol(argv[1], NULL, 10);
 	free(str);
 	free(line);
 	exit(statusj);
@@ -65,7 +66,7 @@ int built_c(char **argv)
 int inbuilt(char **argv, char *str, char *line, int status)
 {
 	if (strcmp(argv[0], "exit") == 0)
-	  return (built_exit(argv, str, line, status));
+		return (built_exit(argv, str, line, status));
 	if (strcmp(argv[0], "env") == 0)
 		return (built_env(argv));
 	if (strcmp(argv[0], "^C") == 0)

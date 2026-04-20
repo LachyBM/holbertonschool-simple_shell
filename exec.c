@@ -39,8 +39,9 @@ int cmd(char **argv)
 
 	if (WIFEXITED(status))
 	{
-	  int exit_status = WEXITSTATUS(status);
-	  return (exit_status);
+		int exit_status = WEXITSTATUS(status);
+
+		return (exit_status);
 	}
 	return (1);
 }
