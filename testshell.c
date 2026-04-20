@@ -104,12 +104,8 @@ int cmd(char **argv)
 	wait(&status);
 	free(path);
 	
-	if (!(WIFEXITED(status) && (WEXITSTATUS(status) == 0)))
-	{
-		free(path);
-		exit(2);
-
-	}
+	if (WIFEXITED(status))
+		return(WEXITSTATUS(status));
 	return (1);
 }
 
