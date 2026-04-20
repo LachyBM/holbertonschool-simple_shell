@@ -113,10 +113,12 @@ int cmd(char **argv)
 
 int built_exit(char **argv, char *str, char *line, int status)
 {
-	(void)argv;
+	int statusj = status;
+	if (argv[1] != NULL)
+		statusj = (int)strtol(argv[1], NULL, 10);
 	free(str);
 	free(line);
-	exit(status);
+	exit(statusj);
 }
 
 int built_env(char **argv)
