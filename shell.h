@@ -15,9 +15,9 @@ char *find_path_env(void);
 char *search_in_path(char *path_env, char *path);
 char *the_path(char *path);
 int cmd(char **argv);
-int built_exot(char **argv, char *str, char *line);
+int built_exit(char **argv, char *str, char *line, int status);
 int built_env(char **argv);
 int built_c(char **argv);
-int inbuilt(char **argv, char *str, char *line);
+int inbuilt(char **argv, char *str, char *line,int status);
 
 #endif

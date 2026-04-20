@@ -111,12 +111,12 @@ int cmd(char **argv)
 	return (1);
 }
 
-int built_exit(char **argv, char *str, char *line)
+int built_exit(char **argv, char *str, char *line, int status)
 {
 	(void)argv;
 	free(str);
 	free(line);
-	exit(22);
+	exit(status);
 }
 
 int built_env(char **argv)
@@ -138,10 +138,10 @@ int built_c(char **argv)
 	return (0);
 }
 
-int inbuilt(char **argv, char *str, char *line)
+int inbuilt(char **argv, char *str, char *line, int status)
 {
 	if (strcmp(argv[0], "exit") == 0)
-		return (built_exit(argv, str, line));
+		return (built_exit(argv, str, line, status));
 	if (strcmp(argv[0], "env") == 0)
 		return (built_env(argv));
 	if (strcmp(argv[0], "^C") == 0)
@@ -176,7 +176,7 @@ int main(void)
 			line = NULL;
 			continue;
 		}
-		status = inbuilt(argv, str, line);
+		status = inbuilt(argv, str, line, status);
 		if (status == -1)
 			status = cmd(argv);
 		free(str);
