@@ -61,11 +61,11 @@ char *the_path(char *path)
 		return (NULL);
 	
 	if (strchr(path, '/'))
-	  {
-	if (access(path, X_OK) == 0)
-		return (strdup(path));
-	  }
-	return (NULL);
+	{
+		if (access(path, X_OK) == 0)
+			return (strdup(path));
+		return (NULL);
+	}
 	
 	path_env = find_path_env();
 	if (!path_env || path_env[0] == '\0')
