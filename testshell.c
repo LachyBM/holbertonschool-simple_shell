@@ -36,7 +36,7 @@ int main(void)
 			line = NULL;
 			continue;
 		}
-		status = inbuilt(argv, str, line, status);
+		status = inbuilt(argv, str, line);
 		if (status == -1)
 			status = cmd(argv);
 		free(str);
