@@ -1,0 +1,100 @@
+#include "shell.h"
+
+/**
+ * main - entry point for the simple shell
+ *
+ * Description: reads user input, parses commands, executes built-ins
+ * or external commands in a loop until exit or EOF.
+ *
+ * Return: exit status
+ */
+
+int main(void)
+{
+	ssize_t nread;
+	size_t len = 0;
+	char *line = NULL;
+	char *argv[64];
+	char *str;
+	int status = 0;
+
+	while (1)
+	{
+		if (isatty(STDIN_FILENO))
+			printf("hsh$ ");
+		nread = getline(&line, &len, stdin);
+		if (nread == -1)
+		{
+			free(line);
+			return (status);
+		}
+		str = split(line, argv);
+		if (argv[0] == NULL || str == NULL)
+		{
+			free(str);
+			free(line);
+			line = NULL;
+			continue;
+		}
+		status = inbuilt(argv, str, line);
+		if (status == -1)
+			status = cmd(argv);
+		free(str);
+		free(line);
+		line = NULL;
+	}
+	return (status);
+}
+
+Correct output - case: Execute a command that fails, and exit without parameter
+
+[copy_files] Filed copied: checker.bash
+[copy_files] Filed copied: exit_no_arg_1.bash
+[copy_files] Filed copied: allowed_functions
+[exec_bash_compare] Command to run:
+./checker.bash --valgrind --ltrace ./hsh ./exit_no_arg_1.bash
+su student_jail -c 'timeout 30 bash -c '"'"'./checker.bash --valgrind --ltrace ./hsh ./exit_no_arg_1.bash'"'"''
+[exec_bash_compare] Return code: 1
+[exec_bash_compare] Student stdout:
+(command)[echo "/bin/ls /test_hbtn
+exit" | ./hsh]
+[GOT]:
+(stdout)[](Length: 0)
+(stderr)[/bin/ls: cannot access '/test_hbtn': No such file or directory
+](Length: 63)
+(status)[0]
+[EXPECTED]:
+(stdout)[](Length: 0)
+(stderr)[/bin/ls: cannot access '/test_hbtn': No such file or directory
+](Length: 63)
+(status)[2]
+Environment:
+SHELL=/bin/bash
+HOSTNAME=d2c73e0dd6cc
+PWD=/home/student_jail/student_repo
+LOGNAME=student_jail
+CONTAINER_PORT=10938
+HOME=/home/student_jail
+LLM_CORRECTION_URL=https://clippy.hbtn.io/api/v1/checker
+WORKING_DIR=/home/student_jail/student_repo
+CONTAINER_PASSWORD=ccec32978e3d4908a710c6800fd6caf5
+CORRECTIONS_DIR=/root/checker_files
+PYTHONPATH=:/checker/
+TERM=xterm
+CONTAINER_HOST=ssh.cod-ap-southeast-2.hbtn.io
+USER=student_jail
+CONTAINER_USER=root
+SHLVL=2
+LLM_CORRECTION_TOKEN=1231231-312303-023231-30932-312093
+LC_CTYPE=C.UTF-8
+NODE_PATH=:/usr/local/lib/node_modules/
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+MAIL=/var/mail/student_jail
+DEBIAN_FRONTEND=noninteractive
+_=/usr/bin/env
+[exec_bash_compare] Student stdout length: 1070
+[exec_bash_compare] Student stderr:
+[exec_bash_compare] Student stderr length: 0
+[exec_bash_compare] Desired stdout:
+OK
+[exec_bash_compare] Desired stdout length: 2

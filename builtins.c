@@ -62,10 +62,10 @@ int built_c(char **argv)
  * Return: result of built-in function, or -1 if not a built-in
  */
 
-int inbuilt(char **argv, char *str, char *line)
+int inbuilt(char **argv, char *str, char *line, int status)
 {
 	if (strcmp(argv[0], "exit") == 0)
-		return (built_exit(argv, str, line));
+	  return (built_exit(argv, str, line, status));
 	if (strcmp(argv[0], "env") == 0)
 		return (built_env(argv));
 	if (strcmp(argv[0], "^C") == 0)
