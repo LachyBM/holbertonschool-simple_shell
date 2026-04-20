@@ -5,16 +5,19 @@
  * @argv: array of arguments
  * @str: duplicated input string
  * @line: original input line
+ * @status:
  *
  * Return: does not return (exits the program)
  */
 
-int built_exit(char **argv, char *str, char *line)
+int built_exit(char **argv, char *str, char *line, int status)
 {
-	(void)argv;
+int statusj = status;
+if (argv[1] != NULL)
+  statusj = (int)strtol(argv[1], NULL, 10);
 	free(str);
 	free(line);
-	exit(0);
+	exit(statusj);
 }
 
 /**
