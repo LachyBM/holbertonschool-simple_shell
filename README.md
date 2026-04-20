@@ -38,6 +38,44 @@ drwxr-xr-x 2 root root  4096 Apr 20 06:08 holder
 -rw-r--r-- 1 root root   788 Apr 20 06:08 testshell.c
 hsh$ 
 ```
+```sh
+root@63bb13fab09146a795396ea95a351084-2377118072:~/holbertonschool-simple_shell# ./hsh
+hsh$ pwd
+/root/holbertonschool-simple_shell
+hsh$
+```
+```sh
+root@63bb13fab09146a795396ea95a351084-2377118072:~/holbertonschool-simple_shell# ./hsh
+hsh$ cat parser.c
+#include "shell.h"
+
+/**
+ * split - splits a line into tokens (arguments)
+ * @line: input string from user
+ * @argv: array to store parsed arguments
+ *
+ * Return: pointer to a duplicated string, or NULL if failure
+ */
+
+char *split(char *line, char **argv)
+{
+	char *str, *piece;
+	int i = 0;
+
+	str = strdup(line);
+	if (!str)
+		return (NULL);
+	piece = strtok(str, " \t\r\n\a");
+	while (piece != NULL && i < 63)
+	{
+		argv[i++] = piece;
+		piece = strtok(NULL, " \t\r\n\a");
+	}
+	argv[i] = NULL;
+	return (str);
+}
+hsh$
+```
 
 ### Files
 | File Name | Description |
