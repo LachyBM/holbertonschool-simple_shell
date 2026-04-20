@@ -33,11 +33,14 @@ int cmd(char **argv)
 		free(path);
 		exit(1);
 	}
+
 	wait(&status);
+	free(path);
 
 	if (WIFEXITED(status))
-	status = WEXITSTATUS(status);
-
-	free(path);
-	return (status);
+	{
+	  int exit_status = WEXITSTATUS(status);
+	  return (exit_status);
+	}
+	return (1);
 }
