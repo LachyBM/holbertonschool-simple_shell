@@ -106,7 +106,7 @@ int cmd(char **argv)
 	
 	if (!(WIFEXITED(status) && (WEXITSTATUS(status) == 0)))
 	{
-		fprintf(strderr, "Child failed. Killing all running children");
+		fprintf(stderr, "Child failed. Killing all running children");
 		exit(1);
 	}
 	return (1);
