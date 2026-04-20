@@ -8,11 +8,11 @@ ___
 ### Installation
 You can  install the simple shell by cloning this repo:
 ```sh
-$ git clone https://github.com/LachyBM/holbertonschool-simple_shell.git
+git clone https://github.com/LachyBM/holbertonschool-simple_shell.git
 ```
 You can compile the files with this command:
 ```sh
-$ gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
+gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 ```
 Lastly, you can run our shell with the following executable:
 ```sh
