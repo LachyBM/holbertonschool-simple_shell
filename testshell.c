@@ -107,6 +107,7 @@ int cmd(char **argv)
 	if (WIFEXITED(status))
 	{
 		int exit_status = WEXITSTATUS(status);
+		printf("%d", exit_status);
 		return(exit_status);
 	}
 	return (1);
