@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * cmd - executes a comman using fork and execve
+ * cmd - executes a command using fork and execve
  * @argv: array of arguments (command and its parameters)
  *
  * Return: 0 on success, 127 if command not found, or 1 on error
@@ -34,6 +34,10 @@ int cmd(char **argv)
 		exit(1);
 	}
 	wait(&status);
+
+	if WIFEXITED(status))
+	status = WEXITSTATUS(status);
+
 	free(path);
-	return (0);
+	return (status);
 }
