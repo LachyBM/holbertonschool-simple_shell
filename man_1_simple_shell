@@ -9,22 +9,35 @@ The hsh shell is a command-line interpreter that provides a command line user in
 The shell is both an interactive command language and a scripting language, and is used by the operating system to control the 
 execution of the system using shell scripts.
 
-.B Overview
+The shell displays a prompt when running in interactive mode and continues to read and execute commands until an exit condition is met.
 
-.B Interactive mode
+.SH COMMANDS
+The following built-in commands are supported:
 
-.B Non-interactive mode
+.TP
+.B exit
+Exits the shell. If an argument is provided, it is used as the exit status.
+Otherwise, the shell exits with the status of the last executed command.
 
-.B Built-ins
+.TP
+.B env
+Prints the current environment variables.
 
-.SH EXAMPLE
+.SH PATH RESOLUTION
+If a command does not contain a slash (/), the shell searches for it in
+the directories specified by the PATH environment variable.
 
-.SH EXIT STATUS
+If the command contains a slash, it is treated as a direct path.
 
-.SH ENVIRONMENT
-
-.B PATH
+.SH RETURN VALUE
+The shell returns the exit status of the last executed command.
+If a command cannot be found, it returns 127.
+If execution fails, it returns 1.
 
 .SH BUGS
+No known bugs.
 
-.SH AUTHOR
+.SH AUTHORS
+Written By:
+Lachlan McKenna
+Marcus Ryan
