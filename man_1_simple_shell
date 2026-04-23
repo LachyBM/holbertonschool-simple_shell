@@ -12,6 +12,47 @@ execution of the system using shell scripts.
 The shell displays a prompt when running in interactive mode and continues to read and execute commands until an exit condition is met.
 
 .SH COMMANDS
+
+__isatty()__ function tests whether  fildes,  an  open  file descriptor, is associated with a terminal device.
+
+__getline()__ function is used to read a string or line from an input stream.
+
+__free()__ function is used to free or deallocate dynamically assigned memory and helps in reducing memory wastage.
+
+__strdup()__ function is used to duplicate a string and returns a pointer to a null-terminated byte string. It is useful so that you don't modify the original input on the command line.
+
+__strtok()__ function splits str[] according to given delimiters and returns the next token. It needs to be called in a loop to get all tokens. It returns NULL when there are no more tokens.
+
+__strncmp()__ 
+
+__strchr()__
+
+__strtol()__
+
+__access()__
+
+__printf()__
+
+__fprintf()__
+
+__sprintf()__
+
+__fork()__
+
+__perror()__
+
+__execve()__
+
+__wait()__
+
+__waitpid()__
+
+__WIFEXITED(status)__
+
+__WEXITSATUS(status)__
+
+
+
 The following built-in commands are supported:
 
 .TP
@@ -22,6 +63,7 @@ Otherwise, the shell exits with the status of the last executed command.
 .TP
 .B env
 Prints the current environment variables.
+
 
 .SH PATH RESOLUTION
 If a command does not contain a slash (/), the shell searches for it in
