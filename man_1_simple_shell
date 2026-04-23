@@ -13,7 +13,7 @@ The shell displays a prompt when running in interactive mode and continues to re
 
 .SH COMMANDS
 
-__isatty()__ function tests whether  fildes,  an  open  file descriptor, is associated with a terminal device.
+__isatty()__ function tests whether fildes,  an  open  file descriptor, is associated with a terminal device.
 
 __getline()__ function is used to read a string or line from an input stream.
 
@@ -23,9 +23,9 @@ __strdup()__ function is used to duplicate a string and returns a pointer to a n
 
 __strtok()__ function splits str[] according to given delimiters and returns the next token. It needs to be called in a loop to get all tokens. It returns NULL when there are no more tokens.
 
-__strncmp()__ 
+__strncmp()__ function compares the first character of two strings. 
 
-__strchr()__
+__strchr()__ 
 
 __strtol()__
 
