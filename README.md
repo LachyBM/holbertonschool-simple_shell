@@ -81,7 +81,7 @@ hsh$
 | File Name | Description |
 | ------ | ------|
 | main.c | Manages the execution loop of the shell. It handles user input, parses it into arguments, and determines whether to execute a built-in command or external program. Runs continuously, displaying a prompt in interactive mode, until an end-of-file condition or exit command in encountered.
-| builtins.c | Implements the shell's built-in commands and the logic used to identify them. The file contains functions to handle commands such as *exit*, which terminates the shell, and *env*, which prints the current environment variables.
+| builtins.c | Implements the shell's built-in commands and the logic used to identify them. The file contains functions to handle commands such as __*exit*__, which terminates the shell, and __*env*__, which prints the current environment variables.
 | exec.c | Handles the execution of external commands. The file contains the logic for creating child processes using fork, executing programes with execve, and synchronising with the parent process using wait.
 | parser.c | Handles the parsing of user input into executable arguments. This file contains functions that tokenize the input string using delimiters such as spaces and newlines, converting it into an array of the arguments suitable for command execution. It also manages memory for the duplicated input string used during tokenization.
 | path.c | Manages command path resolution using the system's environment variables. This file retrieves the PATH variable and searches through it's directories to locate executable commands. It determines whether a command should be executed using a direct path or by searching the PATH, and returns the full path to the executable if found.
